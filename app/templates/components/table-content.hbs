@@ -1,0 +1,32 @@
+<table class="table-content">
+    <tr class="head">
+        {{#each fields as |field|}}
+            <th>{{field.title}}</th>
+        {{/each}}
+    </tr>
+    {{#if loading}}
+        <tr>
+            <td colspan="{{fields.length}}" class="empty">Loading data...</td>
+        </tr>
+    {{else}}
+        {{#if rows}}
+            {{#each rows as |row|}}
+                <tr>
+                    {{#each row as |col|}}
+                        <td>
+                            {{#if col.link}}
+                                {{#link-to col.route col.query}}{{col.text}}{{/link-to}}
+                            {{else}}
+                                {{col.text}}
+                            {{/if}}
+                        </td>
+                    {{/each}}
+                </tr>
+            {{/each}}
+        {{else}}
+            <tr>
+                <td colspan="{{fields.length}}" class="empty">Data not found...</td>
+            </tr>
+        {{/if}}
+    {{/if}}
+</table>
